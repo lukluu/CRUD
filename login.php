@@ -1,36 +1,4 @@
 <?php
-//login
-
-session_start();
-if (isset($_SESSION['email'])) {
-    header("Location: index.php");
-    session_destroy();
-}
-include "config.php";
-if (isset($_POST['login'])) {
-    $email = $_POST['email'];
-    $password = md5($_POST['password']);
-    $query = "SELECT * FROM user WHERE email='$email'";
-    $sql = mysqli_query($conn, $query);
-    if (mysqli_num_rows($sql) > 0) {
-        $result = mysqli_fetch_assoc($sql);
-        if ($password == $result['password']) {
-            $_SESSION['email'] = $email;
-            $_SESSION['nama'] = $result['nama'];
-            $_SESSION['id'] = $result['id'];
-            header("Location: index.php");
-        } else {
-            $_SESSION['salah'] = 'Password Salah';
-        }
-    } else {
-        if ($email == '') {
-            $_SESSION['salah'] = 'Email Tidak Boleh Kosong';
-        } else {
-            $_SESSION['salah'] = 'Email Salah';
-        }
-    }
-}
-
 
 ?>
 <!DOCTYPE html>
@@ -47,16 +15,7 @@ if (isset($_POST['login'])) {
 </head>
 
 <body>
-
-
     <div class="container col-6 border-around-2 bg-light" style=" position: absolute;top:25%;left:25%; padding:1em;">
-        <?php if (isset($_SESSION['salah'])) : ?>
-            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-                <?php echo $_SESSION['salah']; ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-            </div>
-        <?php session_destroy();
-        endif; ?>
         <form class="row g-3" method="post">
             <div class="">
                 <label for="email" class="form-label">Email address</label>

@@ -41,6 +41,7 @@ function upload()
     if ($error === 4) {
         echo "<script>
         alert('Pilih Gambar Terlebih Dahulu');
+        document.location.href='../kelola.php';
         </script>";
         return false;
     }
@@ -52,6 +53,7 @@ function upload()
     if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
         echo "<script>
         alert('Yang Anda Upload Bukan Gambar');
+        document.location.href='../kelola.php';
         </script>";
         return false;
     }
@@ -59,12 +61,13 @@ function upload()
     if ($ukuranFile > 2000000) {
         echo "<script>
         alert('Ukuran Gambar Terlalu Besar');
+        document.location.href='../kelola.php';
         </script>";
         return false;
     }
     $no = 1;
     $namaFileBaru = 'crud-' . uniqid() . '.' . $ekstensiGambar;
-    move_uploaded_file($tmpName, 'img/' . $namaFileBaru);
+    move_uploaded_file($tmpName, '../img/' . $namaFileBaru);
     return $namaFileBaru;
 }
 function ubah($data)
@@ -90,6 +93,12 @@ function hapus($id)
 {
     global $conn;
     $id = $_GET['hapus'];
+    // hapus berserta tempat filenya
+    $data = query("SELECT * FROM data_mhs WHERE id = $id")[0];
+    $foto = $data['foto'];
+    unlink("../img/$foto");
+
+
     mysqli_query($conn, "DELETE FROM `data_mhs` WHERE `data_mhs`.`id` = $id");
     return mysqli_affected_rows($conn);
 }

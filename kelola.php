@@ -1,24 +1,5 @@
 <?php
-include "function.php";
-$id = '';
-$nim = '';
-$nama = '';
-$jurusan = '';
-$jenis_kelamin = '';
-$alamat = '';
-$foto = '';
-if (isset($_GET['ubah'])) {
-    $id = $_GET['ubah'];
-    $data = query("SELECT * FROM data_mhs WHERE id = $id")[0];
-    // var_dump($data);
-    // die;
-    $nim = $data['nim'];
-    $nama = $data['nama'];
-    $jurusan = $data['jurusan'];
-    $jenis_kelamin = $data['jenis_kelamin'];
-    $alamat = $data['alamat'];
-    $foto = $data['foto'];
-}
+include "./src/prosesKelola.php";
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +22,7 @@ if (isset($_GET['ubah'])) {
         </div>
     </nav>
     <div class="container mt-5">
-        <form action="proses.php" method="post" enctype="multipart/form-data">
+        <form action="src/prosesIndex.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?php echo $id ?>">
             <input type="hidden" name="foto" value="<?php echo $foto ?>">
             <div class="mb-3 row">

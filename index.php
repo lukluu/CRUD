@@ -1,10 +1,5 @@
 <?php
-include "function.php";
-$data = query("SELECT * FROM data_mhs");
-if (isset($_POST['cari'])) {
-  $data = cari($_POST['keyword']);
-}
-
+include "src/prosesIndex.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,14 +32,8 @@ if (isset($_POST['cari'])) {
       <input class="form-control me-2" type="search" placeholder="Masukan NIM" aria-label="Search" name="keyword" size="50" autofocus placeholder="cari NIM" autocomplete="off">
       <button class="btn btn-outline-success" type="submit" name="cari">Search</button>
     </form>
+    <!-- tombol TAMBAH -->
     <a href="kelola.php" type="button" class="btn btn-primary mb-3 mt-3">Tambah</a>
-    <?php if (isset($_SESSION['eksekusi'])) : ?>
-      <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-        <?php echo $_SESSION['eksekusi']; ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-      </div>
-    <?php session_destroy();
-    endif; ?>
     <div class="table-responsive mt-3">
       <table class="table align-middle table-bordered table-hover">
         <thead>
@@ -72,7 +61,7 @@ if (isset($_POST['cari'])) {
               <td><?= $data['alamat']  ?></td>
               <td class="text-center">
                 <a href="kelola.php?ubah=<?= $data['id']; ?>" type="button" class="btn btn-success btn-sm">ubah</a>
-                <a href="proses.php?hapus=<?= $data['id']; ?>" onclick="return confirm('Yakin Di Hapus?')" type="button" class="btn btn-danger btn-sm">hapus</a>
+                <a href="src/prosesIndex.php?hapus=<?= $data['id']; ?>" onclick="return confirm('Yakin Di Hapus?')" type="button" class="btn btn-danger btn-sm">hapus</a>
               </td>
           </tr>
           <?php $i++; ?>
