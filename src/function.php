@@ -102,7 +102,7 @@ function hapus($id)
 }
 function cari($keyword)
 {
-    $query = "SELECT *FROM data_mhs WHERE nim LIKE '%$keyword%' OR nama LIKE '%$keyword%' OR jurusan LIKE '%$keyword%' OR jenis_kelamin LIKE '%$keyword%' OR alamat LIKE '%$keyword%'";
+    $query = "SELECT *FROM data_mhs WHERE nim LIKE '%$keyword%' OR nama LIKE '%$keyword%'";
     return query($query);
 }
 

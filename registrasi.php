@@ -17,7 +17,7 @@ include "src/prosesRegistrasi.php";
 <body>
   <!-- //form daftar boostrap -->
   <div class="container col-6 bg-dark text-light" style=" position: absolute;top:15%;left:25%; padding:1em;">
-    <div class="" style="">
+    <div class="">
       <form class="row g-3" method="post" action="">
         <div class="">
           <label for="nama" class="form-label">nama</label>

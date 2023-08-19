@@ -9,14 +9,15 @@ include "function.php";
 // tampil data
 function tampil()
 {
+
     $data = query("SELECT * FROM data_mhs");
     return $data;
 }
-function tampilId($id)
-{
-    $data = query("SELECT * FROM data_mhs WHERE id =$id");
-    return $data;
-}
+// function tampilId($id)
+// {
+//     $data = query("SELECT * FROM data_mhs WHERE id =$id");
+//     return $data;
+// }
 
 
 
