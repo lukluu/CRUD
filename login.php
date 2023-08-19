@@ -1,5 +1,5 @@
 <?php
-
+include "src/prosesRegistrasi.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,15 +15,15 @@
 </head>
 
 <body>
-    <div class="container col-6 border-around-2 bg-light" style=" position: absolute;top:25%;left:25%; padding:1em;">
-        <form class="row g-3" method="post">
+    <div class="container col-6 bg-dark text-light" style=" position: absolute;top:25%;left:25%; padding:1em;">
+        <form class="row g-3" method="post" action="">
             <div class="">
                 <label for="email" class="form-label">Email address</label>
-                <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" value="" required>
             </div>
             <div class="">
                 <label for="password" class="form-label">Password</label>
-                <input name="password" type="password" class="form-control" id="password">
+                <input name="password" type="password" class="form-control" id="password" required>
             </div>
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">

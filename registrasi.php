@@ -18,24 +18,24 @@ include "src/prosesRegistrasi.php";
   <!-- //form daftar boostrap -->
   <div class="container col-6 bg-dark text-light" style=" position: absolute;top:15%;left:25%; padding:1em;">
     <div class="" style="">
-      <form class="row g-3" method="post" action="src/proses.php">
+      <form class="row g-3" method="post" action="">
         <div class="">
           <label for="nama" class="form-label">nama</label>
-          <input name="nama" type="text" class="form-control" id="nama">
+          <input name="username" type="text" class="form-control" id="nama" required>
         </div>
         <div class="">
           <label for="email" class="form-label">Email address</label>
-          <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+          <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
         </div>
         <!-- //password boostrap -->
         <div class="">
           <label for="password" class="form-label">Password</label>
-          <input name="password" type="password" class="form-control" id="password">
+          <input name="password" type="password" class="form-control" id="password" required>
         </div>
         <!-- //confirm password boostrap -->
         <div class="">
           <label for="confirm_password" class="form-label">Confirm Password</label>
-          <input name="confirm_password" type="password" class="form-control" id="confirm_password">
+          <input name="confirm_password" type="password" class="form-control" id="confirm_password" required>
         </div>
         <!-- //tombol daftar boostrap -->
         <div class="col-12 d-flex justify-content-center">

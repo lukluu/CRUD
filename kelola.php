@@ -16,9 +16,13 @@ include "./src/prosesKelola.php";
 
 <body>
     <!-- As a link -->
-    <nav class="navbar bg-dark">
+    <nav class="p-3 bg-dark d-flex align-items-center">
         <div class="container-fluid">
-            <a class="navbar-brand text-white" href="#">CRUD</a>
+            <?php if (isset($_GET["ubah"])) : ?>
+                <h4 class="text-white text-center">UBAH DATA</h4>
+            <?php else : ?>
+                <h4 class="text-white text-center">TAMBAH DATA</h4>
+            <?php endif; ?>
         </div>
     </nav>
     <div class="container mt-5">
@@ -59,12 +63,12 @@ include "./src/prosesKelola.php";
             <div class="mb-3 row">
                 <label for="foto" class="col-sm-2 col-form-label">Foto</label>
                 <?php if (isset($_GET['ubah'])) : ?>
-                    <div class="col-sm-10">
+                    <div class="col-sm-10 mb-3">
                         <img src="img/<?= $foto; ?>" alt="" width="100px">
                     </div>
-                <?php endif; ?>
+                <?php endif ?>
                 <div class="col-sm-10">
-                    <input class="form-control" type="file" name="foto" id="foto" accept="image/*">
+                    <input class="col-sm-10 form-control" type="file" name="foto" id="foto" accept="image/*">
                 </div>
             </div>
             <div class="mb-3 row">

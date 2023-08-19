@@ -1,5 +1,6 @@
 <?php
 include "src/prosesIndex.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,9 +20,13 @@ include "src/prosesIndex.php";
   <nav class="navbar bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand text-white" href="#">CRUD</a>
-      <p class="text-white">
-      </p>
-      <a href="login.php"><button type="button" class="btn btn-light btn-sm" onclick="return confirm('Anda Akan Log Out')">Log Out</button></a>
+      <div>
+        <span class="text-white">
+          <?= $_SESSION['username'];  ?>
+        </span>
+        <a name="" href="src/logout.php"><button type="button" class="btn btn-light btn-sm" onclick="return confirm('Anda Akan Log Out')">Log Out</button></a>
+      </div>
+
     </div>
   </nav>
 
@@ -34,6 +39,11 @@ include "src/prosesIndex.php";
     </form>
     <!-- tombol TAMBAH -->
     <a href="kelola.php" type="button" class="btn btn-primary mb-3 mt-3">Tambah</a>
+    <div class="row">
+      <div class="col">
+        <?php Flasher::flash() ?>
+      </div>
+    </div>
     <div class="table-responsive mt-3">
       <table class="table align-middle table-bordered table-hover">
         <thead>

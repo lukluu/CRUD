@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['login'])) {
+    header('Location: login.php');
+    exit;
+}
 include "function.php";
 
 // tampil data
@@ -7,6 +12,12 @@ function tampil()
     $data = query("SELECT * FROM data_mhs");
     return $data;
 }
+function tampilId($id)
+{
+    $data = query("SELECT * FROM data_mhs WHERE id =$id");
+    return $data;
+}
+
 
 
 
@@ -15,22 +26,20 @@ if (isset($_POST['aksi'])) {
     if ($_POST['aksi'] == 'tambah') {
         $berhasil = tambah($_POST);
         if ($berhasil == 1) {
+            Flasher::setFlash('berhasil', 'ditambahkan', 'success', $_POST['nama']);
             header("Location: ../index.php");
         } else {
+            Flasher::setFlash('gagal', 'ditambahkan', 'danger');
             echo $berhasil;
         }
     } else if ($_POST['aksi'] == 'edit') {
         $berhasil = ubah($_POST);
-
         if ($berhasil == 1) {
+            Flasher::setFlash('berhasil', 'diubah', 'success', $_POST['nama']);
             header("Location: ../index.php");
         } else {
-            echo "
-            <script>
-                alert('Data Gagal Diubah');
-                document.location.href='../index.php';
-            </script>
-            ";
+            Flasher::setFlash('gagal', 'diubah', 'danger', $_POST['nama']);
+            header("Location: ../index.php");
         }
     }
 }
@@ -39,13 +48,10 @@ if (isset($_POST['aksi'])) {
 // hapus
 if (isset($_GET["hapus"])) {
     $berhasil = hapus($_GET);
+
     if ($berhasil == 1) {
-        $_SESSION['eksekusi'] = 'Berhasil di Hapus';
-        echo "
-        <script>
-            document.location.href='../index.php';
-        </script>
-    ";
+        Flasher::setFlash('berhasil', 'dihapus', 'success', $nama);
+        header("Location: ../index.php");
     } else {
         echo $berhasil;
     }
