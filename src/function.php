@@ -48,22 +48,23 @@ function upload()
         document.location.href='../kelola.php';
         </script>";
         return false;
-    } else if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
+    }
+    if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
         echo "<script>
         alert('Yang Anda Upload Bukan Gambar');
         document.location.href='../kelola.php';
         </script>";
         return false;
-    } else if ($ukuranFile > 2000000) {
+    }
+    if ($ukuranFile > 2000000) {
         echo "<script>
         alert('Ukuran Gambar Terlalu Besar');
         document.location.href='../kelola.php';
         </script>";
         return false;
-    } else {
-        $namaFileBaru = 'crud-' . uniqid() . '.' . $ekstensiGambar;
-        move_uploaded_file($tmpName, '../img/' . $namaFileBaru);
     }
+    $namaFileBaru = 'crud-' . uniqid() . '.' . $ekstensiGambar;
+    move_uploaded_file($tmpName, '../img/' . $namaFileBaru);
 
     return $namaFileBaru;
 }
@@ -80,8 +81,12 @@ function ubah($data)
     if ($_FILES['foto']['error'] === 4) {
         $gambar = $gambarLama;
     } else {
-        unlink("../img/$gambarLama");
         $gambar = upload();
+        if (!$gambar) {
+            $gambar = $gambarLama;
+        } else {
+            unlink("../img/$gambarLama");
+        }
     }
     $query = "UPDATE `data_mhs` SET `nim` = '$nim', `nama` = '$nama', `jurusan` = '$jurusan', `jenis_kelamin` = '$jenis_kelamin', `alamat` = '$alamat', `foto` = '$gambar' WHERE `data_mhs`.`id` = $id";
     mysqli_query($conn, $query);
