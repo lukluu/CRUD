@@ -6,81 +6,55 @@ if (!isset($_SESSION['login'])) {
     exit;
 }
 
+var_dump($_POST);
+die;
+$id = $_SESSION['id'];
+// query join user_main dan user
+$data = query("SELECT * FROM user_main
+INNER JOIN data_mhs ON user_main.id_mhs = data_mhs.id
+INNER JOIN user ON user_main.id_user = user.id
+WHERE user_main.id_user = $id");
 
-
-if ($_SESSION['role'] == 1) {
-    $id = $_SESSION['id'];
-    $query = "SELECT *
-  FROM user_main
-  INNER JOIN user ON user_main.id_user = user.id_user
-  INNER JOIN data_mhs ON user_main.id_mhs = data_mhs.id WHERE user_main.id_user = $id";
-    $data = query($query)[0];
-    $nama = $data['nama'];
+if ($data == null) {
+    $data = query("SELECT * FROM user
+    WHERE id = $id")[0];
+    $id_mhs = '';
+    $nim = '';
+    $nama = '';
+    $jurusan = '';
+    $jenis_kelamin = '';
+    $alamat = '';
+    $foto = '';
+    $username = $data['username'];
+    $email = $data['email'];
+    $role = $data['role'];
+    if (isset($_POST['submit'])) {
+        // tambah data_mhs
+        var_dump($_POST);
+        die;
+        if (tambah($_POST) > 0) {
+            echo "<script>
+            alert('data berhasil ditambahkan');
+            document.location.href='user.php';
+            </script>";
+        } else {
+            echo mysqli_error($conn);
+        }
+    }
+} else {
+    $data = query("SELECT * FROM user_main
+INNER JOIN data_mhs ON user_main.id_mhs = data_mhs.id
+INNER JOIN user ON user_main.id_user = user.id
+WHERE user_main.id_user = $id")[0];
     $nim = $data['nim'];
+    $nama = $data['nama'];
     $jurusan = $data['jurusan'];
     $jenis_kelamin = $data['jenis_kelamin'];
     $alamat = $data['alamat'];
     $foto = $data['foto'];
-    $role = $data['role'];
     $username = $data['username'];
     $email = $data['email'];
-} else {
-    $id = $_SESSION['id'];
-    $query = "SELECT *
-    FROM user_main
-    INNER JOIN user ON user_main.id_user = user.id_user
-    INNER JOIN data_mhs ON user_main.id_mhs = data_mhs.id WHERE user_main.id_user = $id";
-    $data = query($query);
-    if ($data == null) {
-        $id = $_SESSION['id'];
-        $query = "SELECT *
-    FROM user WHERE id_user = $id";
-        $data = query($query)[0];
-        $id = '';
-        $nama = '';
-        $nim = '';
-        $jurusan = '';
-        $jenis_kelamin = '';
-        $alamat = '';
-        $foto = '';
-        $role = $data['role'];
-        $username = $data['username'];
-        $email = $data['email'];
-        var_dump($data);
-    } else {
-        $data = query($query)[0];
-        $nama = $data['nama'];
-        $nim = $data['nim'];
-        $jurusan = $data['jurusan'];
-        $jenis_kelamin = $data['jenis_kelamin'];
-        $alamat = $data['alamat'];
-        $foto = $data['foto'];
-        $role = $data['role'];
-        $username = $data['username'];
-        $email = $data['email'];
-    }
-
-    if (isset($_POST['ubah'])) {
-        $id = $_POST['id'];
-        $nim = $_POST['nim'];
-        $username = $_POST['username'];
-        $nama = $_POST['nama'];
-        $jurusan = $_POST['jurusan'];
-        $jenis_kelamin = $_POST['jkel'];
-        $email = $_POST['email'];
-        $alamat = $_POST['alamat'];
-        $foto = $_POST['foto'];
-        $cek = "SELECT * FROM `data_mhs` WHERE `data_mhs`.`id` = $id";
-        $result = mysqli_query($conn, $cek);
-        if ($result) {
-            $query = "UPDATE `data_mhs` SET `nim` = '$nim', `nama` = '$nama', `jurusan` = '$jurusan', `jenis_kelamin` = '$jenis_kelamin', `alamat` = '$alamat', `foto` = '$foto' WHERE `data_mhs`.`id` = $id";
-        } else {
-            $query = "INSERT INTO `data_mhs` (`id`, `nim`, `nama`, `jurusan`, `jenis_kelamin`, `alamat`, `foto`) VALUES ('$id', '$nim', '$nama', '$jurusan', '$jenis_kelamin', '$alamat', '$foto')";
-        }
-        mysqli_query($conn, $query);
-        $query = "UPDATE `user` SET `username` = '$username', `email` = '$email' WHERE `user`.`id_user` = $id";
-        mysqli_query($conn, $query);
-        header('Location: index.php');
-        exit;
-    }
+    $role = $data['role'];
+    // var_dump($data);
+    // die;
 }

@@ -1,5 +1,6 @@
 <?php
 include "src/prosesUser.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -38,9 +39,9 @@ include "src/prosesUser.php";
                         <form action="">
                             <input type="file" name="foto" id="foto" class="form-control" style="display: none;
                             " onchange="form.submit()">
-                            <label for="foto">
-                                <img src="img/profil.jpg" alt="" class="img-thumbnail rounded-circle" width="200px" height="200px">
-                            </label>
+                            <div class="rounded-circle" style="overflow:hidden;border:1px solid">
+                                <img style="object-fit: cover;width:250px; height:250px;" src="img/<?= $foto ?>" alt="" class="img-thumbnail rounded-circle">
+                            </div>
                         </form>
                     </div>
                     <div class="col-sm-9">
@@ -99,9 +100,8 @@ include "src/prosesUser.php";
                             </div>
                             <!-- save -->
                             <div class="mb-3 row">
-                                <div class="col-sm-2"></div>
                                 <div class="col-sm-10">
-                                    <button type="submit" name="ubah" class="btn btn-success">Save</button>
+                                    <button type="submit" class="btn btn-success">Save</button>
                                     <a class="" href="index.php"><button type="button" class="btn btn-warning">Kembali</button></a>
                                 </div>
                             </div>

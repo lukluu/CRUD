@@ -1,6 +1,7 @@
 <?php
 include "src/prosesIndex.php";
 $data = tampil();
+var_dump($_SESSION['role']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,9 +39,9 @@ $data = tampil();
       <button class="btn btn-outline-success" type="submit" name="cari">Search</button>
     </form>
     <!-- tombol TAMBAH -->
-    <a href="kelola.php" type="button" class="btn btn-primary mt-3">Tambah</a>
-    <?php echo $_SESSION['username'] ?>
-
+    <?php if ($_SESSION['role'] == 1) : ?>
+      <a href="kelola.php" type="button" class="btn btn-primary mt-3">Tambah</a>;
+    <?php endif; ?>
     <div class="row">
       <div class="col">
         <?php Flasher::flash() ?>
@@ -65,7 +66,9 @@ $data = tampil();
               <td><?= $data['nama']  ?></td>
               <td class="text-center">
                 <a href="detail.php?detail=<?= $data['id']; ?>" type="button" class="btn btn-warning btn-sm">Detail</a>
-                <a href="src/prosesIndex.php?hapus=<?= $data['id']; ?>" onclick="return confirm('Yakin Di Hapus?')" type="button" class="btn btn-danger btn-sm">hapus</a>
+                <?php if ($_SESSION['role'] == 1) : ?>
+                  <a href="src/prosesIndex.php?hapus=<?= $data['id']; ?>" onclick="return confirm('Yakin Di Hapus?')" type="button" class="btn btn-danger btn-sm">hapus</a>
+                <?php endif; ?>
               </td>
           </tr>
           <?php $i++; ?>

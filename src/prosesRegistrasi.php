@@ -24,7 +24,6 @@ if (isset($_POST['login'])) {
     $result = mysqli_query($conn, "SELECT * FROM user WHERE email ='$email'");
     if (mysqli_num_rows($result) === 1) {
         $row = mysqli_fetch_assoc($result);
-
         $verify = password_verify($password, $row['password']);
 
         if ($verify === true) {
@@ -32,14 +31,14 @@ if (isset($_POST['login'])) {
             if ($row['role'] == 1) {
                 $_SESSION['login'] = true;
                 $_SESSION['role'] = $row['role'];
-                $_SESSION['id'] = $row['id_user'];
+                $_SESSION['id'] = $row['id'];
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['username'] = $row['username'];
                 header('Location: index.php');
                 exit;
             } else {
                 $_SESSION['login'] = true;
-                $_SESSION['id'] = $row['id_user'];
+                $_SESSION['id'] = $row['id'];
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['role'] = $row['role'];
