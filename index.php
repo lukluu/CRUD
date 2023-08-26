@@ -10,7 +10,7 @@ $data = tampil();
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="css/bootstrap.min.css" rel="stylesheet">
-  <script src="js/bootstrap.bundle.min.js"></script>
+
 
   <title>Data Mahasiswa</title>
 </head>
@@ -20,11 +20,11 @@ $data = tampil();
   <nav class="navbar bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand text-white" href="#">CRUD</a>
+
       <div>
         <span class="text-white">
-          <?= $_SESSION['username'];  ?>
+          <a name="" href="user.php"><button type="button" class="btn btn-success btn-sm"> <?= $_SESSION['username'];  ?></button></a>
         </span>
-        <a name="" href="src/logout.php"><button type="button" class="btn btn-light btn-sm" onclick="return confirm('Anda Akan Log Out')">Log Out</button></a>
       </div>
 
     </div>
@@ -39,6 +39,7 @@ $data = tampil();
     </form>
     <!-- tombol TAMBAH -->
     <a href="kelola.php" type="button" class="btn btn-primary mt-3">Tambah</a>
+    <?php echo $_SESSION['username'] ?>
 
     <div class="row">
       <div class="col">
@@ -75,6 +76,7 @@ $data = tampil();
     </div>
 
   </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

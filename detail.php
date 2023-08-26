@@ -24,7 +24,7 @@ include "src/prosesDetail.php";
             <h4 class="text-white text-center">DETAIL MAHASISWA</h4>
         </div>
     </nav>
-    <div class="container p-5">
+    <div class="container p-5" style="height: 100vh;">
         <div class="row d-flex justify-content-center">
             <div class="col">
                 <?php Flasher::flash() ?>

@@ -1,10 +1,11 @@
 <?php
+include "function.php";
 session_start();
 if (isset($_SESSION['login'])) {
     header('Location: index.php');
     exit;
 }
-include "function.php";
+
 
 if (isset($_POST['register'])) {
     if (registrasi($_POST) > 0) {
@@ -27,11 +28,24 @@ if (isset($_POST['login'])) {
         $verify = password_verify($password, $row['password']);
 
         if ($verify === true) {
-            $_SESSION['username'] = $row['username'];
-            $_SESSION['email'] = $row['email'];
-            $_SESSION['login'] = true;
-            header("Location: index.php");
-            exit;
+            // role
+            if ($row['role'] == 1) {
+                $_SESSION['login'] = true;
+                $_SESSION['role'] = $row['role'];
+                $_SESSION['id'] = $row['id_user'];
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['username'] = $row['username'];
+                header('Location: index.php');
+                exit;
+            } else {
+                $_SESSION['login'] = true;
+                $_SESSION['id'] = $row['id_user'];
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['role'] = $row['role'];
+                header('Location: index.php');
+                exit;
+            }
         } else {
             echo "<script>
             alert('password salah');
