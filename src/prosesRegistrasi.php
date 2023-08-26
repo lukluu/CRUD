@@ -19,11 +19,10 @@ if (isset($_POST['register'])) {
 
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
     $result = mysqli_query($conn, "SELECT * FROM user WHERE email ='$email'");
     if (mysqli_num_rows($result) === 1) {
         $row = mysqli_fetch_assoc($result);
-
         $verify = password_verify($password, $row['password']);
 
         if ($verify === true) {
@@ -36,6 +35,8 @@ if (isset($_POST['login'])) {
             echo "<script>
             alert('password salah');
             </script>";
+            var_dump(password_hash($password, PASSWORD_DEFAULT));
+            die;
         }
     } else {
         echo "<script>

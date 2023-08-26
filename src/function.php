@@ -138,10 +138,9 @@ function registrasi($data)
         document.location.href='registrasi.php';
         </script>";
         return false;
+    } else {
+        $password = password_hash($password, PASSWORD_DEFAULT);
     }
-    // enkripsi password
-    $password = password_hash($password, PASSWORD_DEFAULT);
-    // tambahkan user baru ke database
     mysqli_query($conn, "INSERT INTO user VALUES('', '$username', '$email', '$password')");
     return mysqli_affected_rows($conn);
 }

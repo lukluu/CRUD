@@ -21,10 +21,7 @@ $data = tampil();
     <div class="container-fluid">
       <a class="navbar-brand text-white" href="#">CRUD</a>
       <div>
-        <span class="text-white">
-          <?= $_SESSION['username'];  ?>
-        </span>
-        <a name="" href="src/logout.php"><button type="button" class="btn btn-light btn-sm" onclick="return confirm('Anda Akan Log Out')">Log Out</button></a>
+        <a href="user.php" type="button" class="btn btn-success btn-sm"><?= $_SESSION['username']; ?></a>
       </div>
 
     </div>
@@ -64,7 +61,7 @@ $data = tampil();
               <td><?= $data['nama']  ?></td>
               <td class="text-center">
                 <a href="detail.php?detail=<?= $data['id']; ?>" type="button" class="btn btn-warning btn-sm">Detail</a>
-                <a href="src/prosesIndex.php?hapus=<?= $data['id']; ?>" onclick="return confirm('Yakin Di Hapus?')" type="button" class="btn btn-danger btn-sm">hapus</a>
+                <a href="src/prosesIndex.php?hapus=<?= $data['id']; ?>" onclick="confirm('yakin ingin dihapus?')" type="button" class="btn btn-danger btn-sm">hapus</a>
               </td>
           </tr>
           <?php $i++; ?>
