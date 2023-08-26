@@ -126,7 +126,7 @@ function registrasi($data)
     if (mysqli_fetch_assoc($result)) {
         echo "<script>
         alert('username sudah terdaftar');
-        document.location.href='../registrasi.php';
+        document.location.href='registrasi.php';
         </script>";
 
         return false;
@@ -135,21 +135,13 @@ function registrasi($data)
     if ($password !== $password2) {
         echo "<script>
         alert('konfirmasi password tidak sesuai');
-        document.location.href='../registrasi.php';
+        document.location.href='registrasi.php';
         </script>";
         return false;
-    } else {
-        // enkripsi password
-        $password = password_hash($password, PASSWORD_DEFAULT);
-        // tambahkan user baru ke database
-        mysqli_query($conn, "INSERT INTO user VALUES('', '$username', '$email', '$password')");
     }
-
+    // enkripsi password
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    // tambahkan user baru ke database
+    mysqli_query($conn, "INSERT INTO user VALUES('', '$username', '$email', '$password')");
     return mysqli_affected_rows($conn);
-}
-
-
-function session()
-{
-    return session_start();
 }
