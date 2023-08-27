@@ -138,9 +138,8 @@ function registrasi($data)
         document.location.href='registrasi.php';
         </script>";
         return false;
-    } else {
-        $password = password_hash($password, PASSWORD_DEFAULT);
     }
-    mysqli_query($conn, "INSERT INTO user VALUES('', '$username', '$email', '$password')");
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    mysqli_query($conn, "INSERT INTO user VALUES('', '$username', '$email', '$password',0)");
     return mysqli_affected_rows($conn);
 }

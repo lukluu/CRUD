@@ -4,6 +4,11 @@ if (!isset($_SESSION['login'])) {
     header('Location: login.php');
     exit;
 }
+if ($_SESSION['role'] != 1 && $_SESSION['id'] != $_GET['ubah']) {
+    header('Location: index.php');
+    exit;
+}
+
 include "function.php";
 $id = '';
 $nim = '';
