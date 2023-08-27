@@ -38,7 +38,7 @@ include "src/prosesIndex.php";
     </form>
     <!-- tombol TAMBAH -->
     <?php if ($_SESSION['role'] == 1) : ?>
-      <a href="kelola.php" type="button" class="btn btn-primary mt-3">Tambah</a>;
+      <a href="kelola.php" type="button" class="btn btn-primary mt-3">Tambah</a>
     <?php endif; ?>
     <div class="row">
       <div class="col">
