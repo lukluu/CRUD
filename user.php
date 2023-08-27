@@ -34,20 +34,26 @@ include "src/prosesUser.php";
         <div class="card mt-3">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-3" style="position:relative">
                         <!--form -->
-                        <form action="">
-                            <input type="file" name="foto" id="foto" class="form-control" style="display: none;
-                            " onchange="form.submit()">
-                            <div class="rounded-circle" style="overflow:hidden;border:1px solid">
-                                <img style="object-fit: cover;width:250px; height:250px;" src="img/<?= $foto ?>" alt="" class="img-thumbnail rounded-circle">
-                            </div>
+                        <form action="" method="post" enctype="multipart/form-data">
+                            <input type="file" name="foto" id="foto" class="form-control" style="opacity:1; position:absolute; top:0;left:0; transform:translateY(255px)">
+                            <?php if ($foto == '') : ?>
+                                <div class="rounded-circle" style="overflow:hidden;border:1px solid">
+                                    <img style="object-fit: cover;width:250px; height:250px;" src="img/profil.jpg" alt="" class="img-thumbnail rounded-circle">
+                                </div>
+                            <?php else : ?>
+                                <div class="rounded-circle" style="overflow:hidden;border:1px solid">
+
+                                    <img style="object-fit: cover;width:250px; height:250px;" src="img/<?= $foto ?>" alt="" class="img-thumbnail rounded-circle">
+                                </div>
+                            <?php endif; ?>
+                            <button type="submit" name="ubahFoto" class="btn btn-success mt-5">Ubah Foto</button>
                         </form>
                     </div>
                     <div class="col-sm-9">
                         <form action="" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="<?php echo $id ?>">
-                            <input type="hidden" name="foto" value="<?php echo $foto ?>">
                             <div class="mb-3 row">
                                 <label for="nim" class="col-sm-2 col-form-label">NIM</label>
                                 <div class="col-sm-10">
@@ -62,7 +68,7 @@ include "src/prosesUser.php";
                             </div>
 
                             <div class="mb-3 row">
-                                <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+                                <label for="nama" class="col-sm-2 col-form-label">Nama Lengkap</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="text" name="nama" id="nama" required value="<?= $nama; ?>">
                                 </div>
@@ -101,7 +107,7 @@ include "src/prosesUser.php";
                             <!-- save -->
                             <div class="mb-3 row">
                                 <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-success">Save</button>
+                                    <button type="submit" name="submit" class="btn btn-success">Save</button>
                                     <a class="" href="index.php"><button type="button" class="btn btn-warning">Kembali</button></a>
                                 </div>
                             </div>
@@ -109,7 +115,6 @@ include "src/prosesUser.php";
                     </div>
                 </div>
             </div>
-
         </div>
         <div>
             <button id="changePasswordBtn" class="btn btn-primary col-3 mt-3">Ubah Password</button>
@@ -117,16 +122,20 @@ include "src/prosesUser.php";
         </div>
 
         <div id="passwordForm" class=" pt-3 pb-3" style="display: none;">
-            <form>
+            <form method="post">
                 <div class="form-group">
                     <label for="oldPassword">Password Lama</label>
-                    <input type="password" class="form-control" id="oldPassword" placeholder="Enter old password">
+                    <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="Enter old password">
                 </div>
                 <div class="form-group">
                     <label for="newPassword">Password Baru</label>
-                    <input type="password" class="form-control" id="newPassword" placeholder="Enter new password">
+                    <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Enter new password">
                 </div>
-                <button type="submit" class="btn btn-success">Change</button>
+                <div class="form-group">
+                    <label for="confirm">Confirmasi password</label>
+                    <input type="password" class="form-control" id="confirm" name="confirmPassword" placeholder="confirm new password">
+                </div>
+                <button type="submit" name="ubahPass" class="btn btn-success">Change</button>
             </form>
         </div>
     </div>

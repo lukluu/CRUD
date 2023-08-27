@@ -1,7 +1,5 @@
 <?php
 include "src/prosesIndex.php";
-$data = tampil();
-var_dump($_SESSION['role']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +33,7 @@ var_dump($_SESSION['role']);
     <h1 class="judul text-center mb-5">Data Mahasiswa</h1>
     <!-- CARI -->
     <form class="d-flex" role="search" class="mt-5" action="" method="post">
-      <input class="form-control me-2" type="search" placeholder="Masukan NIM atau nama" aria-label="Search" name="keyword" size="50" autofocus placeholder="cari NIM" autocomplete="off">
+      <input class="form-control me-2" type="search" placeholder="Masukan NIM atau nama" aria-label="Search" name="keyword" size="50" value="<?= $_SESSION['username'] ?>" autofocus placeholder="cari NIM" autocomplete="off">
       <button class="btn btn-outline-success" type="submit" name="cari">Search</button>
     </form>
     <!-- tombol TAMBAH -->

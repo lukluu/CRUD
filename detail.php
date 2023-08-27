@@ -62,10 +62,11 @@ include "src/prosesDetail.php";
                     <div class="col-sm-2">
                         <a href="index.php" type="button" class="btn btn-warning btn-sm ">kembali</a>
                     </div>
-                    <div class="col-sm-5">
-                        <a href="kelola.php?ubah=<?= $data['id']; ?>" type="button" class="btn btn-success btn-sm col-sm-5">ubah</a>
-                    </div>
-
+                    <?php if ($_SESSION['role'] == 1 || $id == $_SESSION['id']) : ?>
+                        <div class="col-sm-5">
+                            <a href="kelola.php?ubah=<?= $data['id']; ?>" type="button" class="btn btn-success btn-sm col-sm-5">ubah</a>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
             </div>
